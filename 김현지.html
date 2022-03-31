@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <v-app>
+            <v-app-bar app color="primary" dark>
+                <v-app-bar-nav-icon  @click="ndrawer=true"></v-app-bar-nav-icon>
+                    <v-toolbar-title> 부산 관광 안내 </v-toolbar-title>
+            </v-app-bar>
+
+            <!-- 서랍 상단 프로필 -->
+            <v-navigation-drawer absolute temporary v-model="ndrawer">
+                <v-toolbar flat height="70px">
+                    <v-list>
+                        <v-list-item>
+                            <v-list-item-avatar class="grey" size="40"><v-icon dark size="24">mdi-account</v-icon></v-list-item-avatar>
+                            <v-list-item-content>
+                                <v-list-item-title>즐거운 부산</v-list-item-title>
+                                <v-list-item-subtitle>다이나믹 부산</v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-toolbar>
+
+                <v-divider></v-divider>
+
+                <!-- 서랍 메뉴 리스트 -->
+                <v-list>
+                    <v-list-item v-for = "item in menuList"> 
+                        <!-- 링크 연결 X  -->
+                        <v-list-item-action>
+                            <v-icon>{{item.icon}}</v-icon>
+                        </v-list-item-action>
+
+                        <v-list-item-content>
+                            <v-list-item-title>
+                                {{item.title}}
+                            </v-list-item-title>
+                        </v-list-item-content>
+
+                    </v-list-item>
+                </v-list> 
+            </v-navigation-drawer> 
+
+            <!-- 본문 -->
+
+            <v-content>
+                <v-container>
+                        <v-layout cols="12" justify-center>
+                            <h1 cols="12">현재 인기있는 곳입니다.</h1>
+                        </v-layout>
+                        <v-layout cols="12" justify-center>
+                            <p>추천을 통해 인기 있는 곳을 알려주세요.</p>
+                        </v-layout>
+
+                        <!-- 카드 내용 -->
+                        <v-row>
+                            <v-col cols="12" sm="6">
+                                <v-card>
+                                    <v-img src="./img/01.jpg" height="50%"></v-img>
+                                    <v-card-title>해운대</v-card-title>
+                                        <v-card-actions>
+                                            0
+                                            <v-spacer></v-spacer>
+                                            <v-btn  @click="count += 1" color="green" dark>추천</v-btn>
+                                        </v-card-actions>
+                                </v-card>
+                            </v-col>
+
+                            <v-col cols="12" sm="6" >
+                                <v-card>
+                                    <v-img src="./img/02.jpg"  height="50%"></v-img>
+                                    <v-card-title>바다 도시 야경</v-card-title>
+                                    <v-card-actions>
+                                        0
+                                        <v-spacer></v-spacer>
+                                        <v-btn  @click="num += 1" color="green" dark>추천</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-col>
+
+                            <v-col cols="12" sm="6">
+                                <v-card>
+                                    <v-img src="./img/03.jpg" height="50%"></v-img>
+                                    <v-card-title>광안대교</v-card-title>
+                                    <v-card-actions>
+                                        0
+                                        <v-spacer></v-spacer>
+                                        <v-btn  @click="num += 1" color="green" dark>추천</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-col>
+
+                            <v-col cols="12" sm="6" >
+                                <v-card>
+                                    <v-img src="./img/04.jpg" height="50%"></v-img>
+                                    <v-card-title>해운대 인어동상</v-card-title>
+                                <v-card-actions>
+                                    0
+                                    <v-spacer></v-spacer>
+                                    <v-btn  @click="num += 1" color="green" dark>추천</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+
+                            <v-col>
+                                <v-list-item v-for="n in num" :key="n">
+                                    <v-list-item-content>
+                                        여기를 추천합니다
+                                    </v-list-item-content>
+                                </v-list-item>
+
+                            </v-col>
+
+                        </v-row>
+                
+                        
+                    
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+
+
+
+    <script>
+        new Vue ({
+            el : "#app",
+            vuetify : new Vuetify(),
+            data : {
+                num : 0,
+                ndrawer : false,
+                menuList : [
+                    {title : "메인페이지",
+                    icon : "mdi-card-bulleted-outline"},
+
+                    {title : "관광지소개",
+                    icon : "mdi-clipboard-outline"},
+
+                    {title : "추천명소",
+                    icon : "mdi-check"},],
+
+                placeList : [
+                    {count: 0,
+                    name : "해운대",
+                    src : "./img/01.jpg"},
+
+                    {count: 0,
+                    name : "바다 도시 야경",
+                    src : "./img/02.jpg"},
+
+                    {count: 0,
+                    name : "광안대교",
+                    src : "./img/03.jpg"},
+
+                    {count: 0,
+                    name : "해운대 인어동상",
+                    src : "./img/04.jpg"},
+                ],
+            },
+            methods : {},
+            
+
+        })
+    </script>
+
+</body>
+</html>
